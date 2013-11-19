@@ -18,6 +18,7 @@ class Control(object):
         self.fps = 60.0
         self.phase = 0
         self.scroll_speed = 45
+        self.wave_length = (2*math.pi)*100
         self.points = self.get_curve_points()
 
     def get_y(self,x):
@@ -62,7 +63,7 @@ class Control(object):
             self.points = self.get_curve_points()
             tan,norm = self.get_vectors(pg.mouse.get_pos()[0])
             self.phase += self.scroll_speed*delta
-            self.phase %= (2*math.pi*100)  #hardcoded wavelength
+            self.phase %= self.wave_length
             self.screen.fill(pg.Color("black"))
             pg.draw.aalines(self.screen,pg.Color("white"),False,self.points)
             pg.draw.line(self.screen,pg.Color("red"),tan[0],tan[1],3)
